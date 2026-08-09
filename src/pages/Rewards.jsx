@@ -1,81 +1,125 @@
 import {
-  Award,
-  Gift,
-  Leaf,
-  ShoppingBag,
-  Coffee,
-  Ticket,
+  BusFront,
+  TrainFront,
+  TramFront,
+  WalletCards,
+  ArrowRight,
   CheckCircle2,
-  Clock,
-  ArrowUpRight,
-  Sparkles,
+  Leaf,
+  Coffee,
+  ShoppingBag,
+  HeartPulse,
+  Gift,
+  History,
+  Store,
+  Ticket,
+  MapPin
 } from "lucide-react"
+
 import { useState } from "react"
 
-const rewards = [
-  {
-    id: 1,
-    name: "Eco Store Voucher",
-    description: "₹100 voucher for sustainable products",
-    points: 500,
-    icon: ShoppingBag,
-  },
-  {
-    id: 2,
-    name: "Plant a Tree",
-    description: "Sponsor one tree through our green partners",
-    points: 750,
-    icon: Leaf,
-  },
-  {
-    id: 3,
-    name: "Coffee Voucher",
-    description: "Free beverage at a partner café",
-    points: 300,
-    icon: Coffee,
-  },
-  {
-    id: 4,
-    name: "Movie Ticket",
-    description: "Redeem a standard movie ticket",
-    points: 900,
-    icon: Ticket,
-  },
-]
-
-const history = [
-  {
-    reward: "Coffee Voucher",
-    points: 300,
-    date: "Today",
-    status: "Redeemed",
-  },
-  {
-    reward: "Eco Store Voucher",
-    points: 500,
-    date: "12 Jun 2026",
-    status: "Redeemed",
-  },
-  {
-    reward: "Plant a Tree",
-    points: 750,
-    date: "28 May 2026",
-    status: "Processing",
-  },
-]
+import "./Rewards.css"
 
 function Rewards() {
-  const [points, setPoints] = useState(1280)
+  const [category, setCategory] = useState("All Rewards")
+  const [walletConnected, setWalletConnected] = useState(false)
+  const [transitType, setTransitType] = useState("bus")
   const [message, setMessage] = useState("")
 
-  const redeem = (reward) => {
-    if (points < reward.points) {
-      setMessage(`You need ${reward.points - points} more points.`)
-      return
-    }
+  const points = 12450
 
-    setPoints(points - reward.points)
-    setMessage(`${reward.name} redeemed successfully!`)
+  const categories = [
+    "All Rewards",
+    "Transit",
+    "Restaurants",
+    "Local Shops",
+    "Healthcare"
+  ]
+
+  const transitOptions = [
+    {
+      id: "bus",
+      name: "City Bus",
+      description: "Bus rides across the city",
+      icon: BusFront
+    },
+    {
+      id: "train",
+      name: "Metro / Train",
+      description: "Metro and local train travel",
+      icon: TrainFront
+    },
+    {
+      id: "shuttle",
+      name: "Municipal Shuttle",
+      description: "City shuttle services",
+      icon: TramFront
+    }
+  ]
+
+  const rewards = [
+    {
+      category: "Restaurants",
+      title: "₹100 Restaurant Voucher",
+      description: "Use at participating local restaurants and cafés.",
+      points: 1000,
+      icon: Coffee,
+      label: "LOCAL FOOD"
+    },
+    {
+      category: "Restaurants",
+      title: "Free Artisan Coffee",
+      description: "Redeem for one regular beverage at a partner café.",
+      points: 500,
+      icon: Coffee,
+      label: "CAFÉ"
+    },
+    {
+      category: "Local Shops",
+      title: "₹250 Local Store Voucher",
+      description: "Spend your points at participating neighborhood stores.",
+      points: 2500,
+      icon: ShoppingBag,
+      label: "LOCAL SHOP"
+    },
+    {
+      category: "Healthcare",
+      title: "Jan Aushadhi Benefit",
+      description:
+        "View participating Jan Aushadhi Kendras and available program benefits.",
+      points: 1000,
+      icon: HeartPulse,
+      label: "HEALTHCARE"
+    },
+    {
+      category: "Local Shops",
+      title: "Green Store Voucher",
+      description: "Get discounts on selected sustainable products.",
+      points: 1500,
+      icon: Store,
+      label: "ECO STORE"
+    },
+    {
+      category: "All Rewards",
+      title: "Green Living Reward",
+      description: "Unlock selected community sustainability offers.",
+      points: 750,
+      icon: Gift,
+      label: "GREEN"
+    }
+  ]
+
+  const visibleRewards =
+    category === "All Rewards"
+      ? rewards
+      : rewards.filter((reward) => reward.category === category)
+
+  const redeem = (title) => {
+    setMessage(`${title} selected for redemption.`)
+
+    setTimeout(() => {
+      setMessage("")
+    }, 3500)
   }
 
   return (
@@ -83,246 +127,472 @@ function Rewards() {
 
       {/* HEADER */}
 
-      <div className="page-heading">
-        <div>
-          <span className="eyebrow">CITIZEN REWARDS</span>
+      <div className="rewards-page-header">
 
-          <h1>Rewards & Impact</h1>
+        <div>
+          <span className="rewards-eyebrow">
+            COMMUNITY REWARDS
+          </span>
+
+          <h1>
+            Make your points work for you.
+          </h1>
 
           <p>
-            Turn responsible waste segregation into meaningful rewards.
+            Turn responsible waste management into useful everyday benefits —
+            from public transport to local businesses and community services.
           </p>
         </div>
 
-        <div className="reward-level">
-          <Sparkles size={14} />
-          Eco Champion
-        </div>
+        <button className="history-button">
+          <History size={15} />
+          Reward History
+        </button>
+
       </div>
 
 
       {/* BALANCE */}
 
-      <div className="rewards-summary">
+      <div className="rewards-balance">
 
-        <div className="points-card">
+        <div className="balance-main">
 
-          <div className="points-card-icon">
-            <Award size={25} />
+          <div className="balance-icon">
+            <Leaf size={23} />
           </div>
 
           <div>
-            <span>Available Points</span>
-            <strong>{points.toLocaleString()}</strong>
-            <small>Keep segregating to earn more</small>
+            <span>
+              CURRENT BALANCE
+            </span>
+
+            <strong>
+              {points.toLocaleString()}
+              <small> pts</small>
+            </strong>
+
+            <p>
+              +450 points earned this week from recycling
+            </p>
           </div>
 
         </div>
 
+        <div className="balance-stat">
+          <span>
+            RESPONSIBLE ACTIONS
+          </span>
 
-        <div className="impact-card">
+          <strong>
+            18
+          </strong>
 
-          <div className="impact-icon">
-            <Leaf size={21} />
-          </div>
-
-          <div>
-            <span>Waste Diverted</span>
-            <strong>42.6 kg</strong>
-            <small>From landfill</small>
-          </div>
-
-        </div>
-
-
-        <div className="impact-card">
-
-          <div className="impact-icon">
-            <CheckCircle2 size={21} />
-          </div>
-
-          <div>
-            <span>Segregation Accuracy</span>
-            <strong>94%</strong>
-            <small>Excellent consistency</small>
-          </div>
-
+          <small>
+            this month
+          </small>
         </div>
 
       </div>
 
 
-      {/* MESSAGE */}
+      {/* CATEGORY BAR */}
 
-      {message && (
-        <div className="reward-message">
-          <CheckCircle2 size={16} />
-          {message}
-        </div>
-      )}
+      <div className="reward-category-bar">
+
+        {categories.map((item) => (
+
+          <button
+            key={item}
+            className={
+              category === item
+                ? "category-button active"
+                : "category-button"
+            }
+            onClick={() => setCategory(item)}
+          >
+            {item}
+          </button>
+
+        ))}
+
+      </div>
 
 
-      {/* REWARDS */}
+      {/* TRANSIT WALLET */}
 
-      <div className="dashboard-card rewards-list-card">
+      {(category === "All Rewards" || category === "Transit") && (
 
-        <div className="card-header">
+        <section className="transit-card">
 
-          <div>
-            <h3>Available Rewards</h3>
-            <p>Redeem your points with our sustainability partners.</p>
+          <div className="transit-card-header">
+
+            <div>
+
+              <span className="rewards-eyebrow">
+                SUSTAINABLE MOBILITY
+              </span>
+
+              <h2>
+                Transit Wallet
+              </h2>
+
+              <p>
+                Use EcoPoints for bus, train and municipal shuttle travel.
+              </p>
+
+            </div>
+
+            <div className="transit-wallet-icon">
+              <WalletCards size={23} />
+            </div>
+
           </div>
 
-          <Gift size={20} />
 
-        </div>
+          {!walletConnected ? (
 
+            <div className="wallet-connect-box">
 
-        <div className="rewards-grid">
+              <div className="wallet-small-icon">
+                <WalletCards size={20} />
+              </div>
 
-          {rewards.map((reward) => {
+              <div className="wallet-connect-info">
 
-            const Icon = reward.icon
-            const canRedeem = points >= reward.points
+                <strong>
+                  Connect your transit account
+                </strong>
 
-            return (
-              <div className="reward-item" key={reward.id}>
+                <span>
+                  Link your city transit wallet to redeem EcoPoints
+                  for travel credit.
+                </span>
 
-                <div className="reward-icon">
-                  <Icon size={23} />
+              </div>
+
+              <button
+                className="connect-wallet-button"
+                onClick={() => setWalletConnected(true)}
+              >
+                Connect Wallet
+                <ArrowRight size={15} />
+              </button>
+
+            </div>
+
+          ) : (
+
+            <>
+
+              <div className="wallet-connected-box">
+
+                <div className="wallet-account">
+
+                  <div className="wallet-account-icon">
+                    <WalletCards size={17} />
+                  </div>
+
+                  <div>
+                    <span>
+                      Connected transit account
+                    </span>
+
+                    <strong>
+                      CityMove •••• 4821
+                    </strong>
+                  </div>
+
                 </div>
 
-                <div className="reward-info">
+                <div className="wallet-status">
+                  <CheckCircle2 size={14} />
+                  Connected
+                </div>
 
-                  <strong>{reward.name}</strong>
+              </div>
 
-                  <span>{reward.description}</span>
 
-                  <div className="reward-bottom">
+              <div className="transit-content">
 
-                    <b>
-                      {reward.points.toLocaleString()} pts
-                    </b>
+                <div className="transit-types">
 
-                    <button
-                      disabled={!canRedeem}
-                      onClick={() => redeem(reward)}
-                    >
-                      {canRedeem ? "Redeem" : "Need more"}
-                      {canRedeem && <ArrowUpRight size={12} />}
-                    </button>
+                  <h3>
+                    Choose your transit
+                  </h3>
+
+                  <div className="transit-type-list">
+
+                    {transitOptions.map((option) => {
+
+                      const Icon = option.icon
+
+                      return (
+                        <button
+                          key={option.id}
+                          className={
+                            transitType === option.id
+                              ? "transit-type selected"
+                              : "transit-type"
+                          }
+                          onClick={() =>
+                            setTransitType(option.id)
+                          }
+                        >
+
+                          <div className="transit-type-icon">
+                            <Icon size={19} />
+                          </div>
+
+                          <div>
+                            <strong>
+                              {option.name}
+                            </strong>
+
+                            <span>
+                              {option.description}
+                            </span>
+                          </div>
+
+                          {transitType === option.id && (
+                            <CheckCircle2
+                              size={16}
+                              className="selected-check"
+                            />
+                          )}
+
+                        </button>
+                      )
+
+                    })}
+
+                  </div>
+
+                </div>
+
+
+                <div className="transit-credit">
+
+                  <h3>
+                    Redeem transit credit
+                  </h3>
+
+                  <div className="credit-grid">
+
+                    {[50, 100, 250].map((value) => {
+
+                      const requiredPoints = value * 10
+
+                      return (
+                        <button
+                          key={value}
+                          className="credit-card"
+                          onClick={() =>
+                            redeem(`₹${value} transit credit`)
+                          }
+                        >
+
+                          <strong>
+                            ₹{value}
+                          </strong>
+
+                          <span>
+                            {requiredPoints.toLocaleString()} pts
+                          </span>
+
+                          <small>
+                            Redeem
+                            <ArrowRight size={12} />
+                          </small>
+
+                        </button>
+                      )
+
+                    })}
 
                   </div>
 
                 </div>
 
               </div>
-            )
-          })}
 
-        </div>
+            </>
 
-      </div>
+          )}
+
+        </section>
+
+      )}
 
 
-      {/* HOW TO EARN */}
+      {/* REWARD LIST */}
 
-      <div className="dashboard-card earn-card">
+      {(category !== "Transit") && (
 
-        <div className="card-header">
-          <div>
-            <h3>How to earn points</h3>
-            <p>Every responsible action contributes to your score.</p>
-          </div>
-        </div>
+        <section className="voucher-section">
 
-        <div className="earn-grid">
+          <div className="voucher-section-header">
 
-          <div className="earn-item">
-            <div className="earn-number">+10</div>
             <div>
-              <strong>Correct segregation</strong>
-              <span>Verified waste matches your claim.</span>
-            </div>
-          </div>
 
-          <div className="earn-item">
-            <div className="earn-number">+25</div>
-            <div>
-              <strong>Community collection</strong>
-              <span>Participate in a collection drive.</span>
-            </div>
-          </div>
-
-          <div className="earn-item penalty">
-            <div className="earn-number">−5</div>
-            <div>
-              <strong>Incorrect segregation</strong>
-              <span>Points deducted for incorrect claims.</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      {/* HISTORY */}
-
-      <div className="dashboard-card redemption-card">
-
-        <div className="card-header">
-
-          <div>
-            <h3>Redemption History</h3>
-            <p>Your recent reward activity.</p>
-          </div>
-
-          <Clock size={19} />
-
-        </div>
-
-
-        <div className="redemption-table">
-
-          <div className="redemption-row redemption-header">
-            <span>Reward</span>
-            <span>Points</span>
-            <span>Date</span>
-            <span>Status</span>
-          </div>
-
-          {history.map((item, index) => (
-
-            <div className="redemption-row" key={index}>
-
-              <strong>{item.reward}</strong>
-
-              <span>
-                −{item.points}
+              <span className="rewards-eyebrow">
+                COMMUNITY BENEFITS
               </span>
 
-              <span>
-                {item.date}
-              </span>
-
-              <b
-                className={
-                  item.status === "Redeemed"
-                    ? "redeemed-status"
-                    : "processing-status"
-                }
-              >
-                {item.status}
-              </b>
+              <h2>
+                {category === "All Rewards"
+                  ? "Vouchers & Benefits"
+                  : category}
+              </h2>
 
             </div>
 
-          ))}
+            <span className="reward-count">
+              {visibleRewards.length} available
+            </span>
+
+          </div>
+
+
+          <div className="voucher-grid">
+
+            {visibleRewards.map((reward) => {
+
+              const Icon = reward.icon
+
+              return (
+                <div
+                  className="voucher-card"
+                  key={reward.title}
+                >
+
+                  <div className="voucher-image">
+
+                    <div className="voucher-icon">
+                      <Icon size={24} />
+                    </div>
+
+                    <span>
+                      {reward.points.toLocaleString()} pts
+                    </span>
+
+                  </div>
+
+
+                  <div className="voucher-body">
+
+                    <small>
+                      {reward.label}
+                    </small>
+
+                    <h3>
+                      {reward.title}
+                    </h3>
+
+                    <p>
+                      {reward.description}
+                    </p>
+
+                    <button
+                      className="redeem-button"
+                      onClick={() => redeem(reward.title)}
+                    >
+                      Redeem Reward
+                      <ArrowRight size={14} />
+                    </button>
+
+                  </div>
+
+                </div>
+              )
+
+            })}
+
+          </div>
+
+        </section>
+
+      )}
+
+
+      {/* JAN AUSHADHI / CIVIC NOTE */}
+
+      {(category === "All Rewards" ||
+        category === "Healthcare") && (
+
+        <section className="healthcare-note">
+
+          <div className="healthcare-icon">
+            <HeartPulse size={21} />
+          </div>
+
+          <div>
+
+            <strong>
+              Healthcare & Jan Aushadhi
+            </strong>
+
+            <p>
+              Explore nearby Jan Aushadhi Kendras and eligible community
+              benefits. Availability and redemption rules depend on the
+              participating program.
+            </p>
+
+          </div>
+
+          <button className="outline-small-button">
+            <MapPin size={14} />
+            Find Nearby
+          </button>
+
+        </section>
+
+      )}
+
+
+      {/* REWARD HISTORY */}
+
+      <section className="reward-history-strip">
+
+        <div className="history-strip-icon">
+          <Ticket size={18} />
+        </div>
+
+        <div>
+
+          <strong>
+            Your rewards are linked to your impact
+          </strong>
+
+          <span>
+            Every verified recycling action contributes to your EcoPoints balance.
+          </span>
 
         </div>
 
-      </div>
+        <button>
+          View History
+          <ArrowRight size={14} />
+        </button>
+
+      </section>
+
+
+      {/* SUCCESS MESSAGE */}
+
+      {message && (
+
+        <div className="reward-toast">
+
+          <CheckCircle2 size={18} />
+
+          <span>
+            {message}
+          </span>
+
+        </div>
+
+      )}
 
     </div>
   )

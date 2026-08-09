@@ -28,7 +28,14 @@ function Layout() {
       name: "Recycler",
       subtitle: "Marketplace Partner",
       avatar: "R"
-    }
+    },
+    COLLECTOR: {
+  label: "Collection Operations",
+  title: "Collector Dashboard",
+  name: "Collection Team",
+  subtitle: "Waste Collection Unit",
+  avatar: "K"
+}
   }
 
   const current = roleInfo[role]

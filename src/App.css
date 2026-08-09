@@ -1108,3 +1108,280 @@ button {
     flex-direction: column;
   }
 }
+
+.hotspots-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 8px 0 40px;
+}
+
+.hotspots-heading {
+  margin-bottom: 20px;
+}
+
+.hotspots-heading h1 {
+  margin: 5px 0 7px;
+  color: #063d33;
+  font-size: 30px;
+  letter-spacing: -.03em;
+}
+
+.hotspots-heading p {
+  margin: 0;
+  color: #71807b;
+  font-size: 11px;
+}
+
+/* SUMMARY */
+
+.hotspot-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 11px;
+  margin-bottom: 17px;
+}
+
+.hotspot-summary-card {
+  min-height: 76px;
+  padding: 14px;
+  border: 1px solid #d7e0dd;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.hotspot-summary-icon {
+  width: 37px;
+  height: 37px;
+  border-radius: 9px;
+  background: #e8f5f1;
+  color: #08765c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotspot-summary-icon.empty {
+  background: #f0f3f2;
+  color: #71807b;
+}
+
+.hotspot-summary-card strong {
+  display: block;
+  color: #173d35;
+  font-size: 19px;
+}
+
+.hotspot-summary-card span {
+  display: block;
+  margin-top: 2px;
+  color: #7c8984;
+  font-size: 8px;
+}
+
+/* TOOLBAR */
+
+.hotspot-toolbar {
+  padding: 10px;
+  border: 1px solid #d7e0dd;
+  border-radius: 9px;
+  background: white;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 17px;
+}
+
+.hotspot-search {
+  flex: 1;
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid #d5dfdc;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #7c8984;
+}
+
+.hotspot-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 9px;
+}
+
+.hotspot-filters {
+  display: flex;
+  gap: 5px;
+}
+
+.hotspot-filter {
+  height: 33px;
+  padding: 0 13px;
+  border: none;
+  border-radius: 6px;
+  background: #f1f4f3;
+  color: #64736d;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.hotspot-filter.active {
+  background: #004d3c;
+  color: white;
+}
+
+/* GRID */
+
+.hotspots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.hotspot-card {
+  padding: 15px;
+  border: 1px solid #d7e0dd;
+  border-radius: 11px;
+  background: white;
+}
+
+.hotspot-card-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.hotspot-location-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: #e8f5f1;
+  color: #08765c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotspot-title {
+  flex: 1;
+}
+
+.hotspot-title strong {
+  display: block;
+  color: #173d35;
+  font-size: 10px;
+}
+
+.hotspot-title span {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #7d8985;
+  font-size: 8px;
+}
+
+.hotspot-more {
+  border: none;
+  background: transparent;
+  color: #7b8984;
+}
+
+/* STATUS */
+
+.hotspot-status-row {
+  margin-top: 15px;
+  padding: 9px 0;
+  border-top: 1px solid #edf1ef;
+  border-bottom: 1px solid #edf1ef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hotspot-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.hotspot-status.full {
+  color: #08765c;
+}
+
+.hotspot-status.empty {
+  color: #77847f;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.hotspot-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #899590;
+  font-size: 8px;
+}
+
+.hotspot-description {
+  min-height: 42px;
+  padding: 11px 0;
+  color: #687771;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.hotspot-card-footer {
+  padding-top: 10px;
+  border-top: 1px solid #edf1ef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hotspot-card-footer span {
+  color: #899590;
+  font-size: 8px;
+}
+
+.hotspot-card-footer button {
+  border: none;
+  background: transparent;
+  color: #08765c;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .hotspots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hotspot-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .hotspots-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hotspot-toolbar {
+    flex-direction: column;
+  }
+
+  .hotspot-summary {
+    grid-template-columns: 1fr;
+  }
+}

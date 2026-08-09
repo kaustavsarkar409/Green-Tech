@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import "./App.css"
+
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom"
 
 import Layout from "./layouts/Layout"
 
@@ -10,6 +16,13 @@ import Rewards from "./pages/Rewards"
 import Marketplace from "./pages/Marketplace"
 import Hotspots from "./pages/Hotspots"
 import EWaste from "./pages/EWaste"
+import Complaints from "./pages/Complaints"
+import Analytics from "./pages/Analytics"
+import GarbageTruckTracker from "./pages/GarbageTruckTracker"
+
+import Collector, {
+  Leaderboards
+} from "./pages/Collector"
 
 function App() {
   return (
@@ -18,6 +31,8 @@ function App() {
       <Routes>
 
         <Route element={<Layout />}>
+
+          {/* MUNICIPAL */}
 
           <Route
             path="/"
@@ -37,6 +52,13 @@ function App() {
           <Route
             path="/hotspots"
             element={<Hotspots />}
+          />
+
+          {/* MUNICIPAL GARBAGE TRUCK TRACKER */}
+
+          <Route
+            path="/truck-tracker"
+            element={<GarbageTruckTracker />}
           />
 
           <Route
@@ -60,6 +82,19 @@ function App() {
           />
 
           <Route
+            path="/complaints"
+            element={<Complaints />}
+          />
+
+          <Route
+            path="/analytics"
+            element={<Analytics />}
+          />
+
+
+          {/* CITIZEN */}
+
+          <Route
             path="/rewards"
             element={<Rewards />}
           />
@@ -67,6 +102,39 @@ function App() {
           <Route
             path="/marketplace"
             element={<Marketplace />}
+          />
+
+          <Route
+            path="/leaderboards"
+            element={<Leaderboards />}
+          />
+
+
+          {/* COLLECTOR */}
+
+          <Route
+            path="/collector"
+            element={<Collector />}
+          />
+
+          <Route
+            path="/collector/routes"
+            element={<Collector />}
+          />
+
+          <Route
+            path="/collector/map"
+            element={<Collector />}
+          />
+
+          <Route
+            path="/collector/pickups"
+            element={<Collector />}
+          />
+
+          <Route
+            path="/collector/feedback"
+            element={<Collector />}
           />
 
         </Route>

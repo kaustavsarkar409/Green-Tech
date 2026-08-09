@@ -6,64 +6,89 @@ import {
   Gift,
   Store,
   MapPinned,
-  Camera,
   Smartphone,
-  Package
+  BarChart3,
+  UserRound,
+  MessageSquareWarning,
+  Navigation,
+  ClipboardCheck,
+  Map,
+  Trophy,
+  Radio
 } from "lucide-react"
 
 import { NavLink } from "react-router-dom"
 
 function Sidebar({ role, setRole }) {
 
-  const panels = {
+  const municipalItems = [
+    ["Dashboard", "/", LayoutDashboard],
+    ["Smart Bins", "/bins", Trash2],
+    ["Garbage Hotspots", "/hotspots", MapPinned],
 
-    ADMIN: {
-      title: "Municipal Operations",
-      subtitle: "Waste Management Dept",
+    // NEW MUNICIPAL TRUCK TRACKER
+    ["Garbage Truck Tracker", "/truck-tracker", Radio],
 
-      items: [
-        ["Dashboard", "/", LayoutDashboard],
-        ["Smart Bins", "/bins", Trash2],
-        ["Garbage Hotspots", "/hotspots", MapPinned],
-        ["Collection Routes", "/routes", Truck],
-        ["Waste Verification", "/verification", Recycle],
-        ["E-Waste", "/e-waste", Smartphone],
-        ["Rewards", "/rewards", Gift],
-        ["Marketplace", "/marketplace", Store]
-      ]
-    },
+    ["Collection Routes", "/routes", Truck],
+    ["Waste Verification", "/verification", Recycle],
+    ["E-Waste Management", "/e-waste", Smartphone],
+    ["Citizen Complaints", "/complaints", MessageSquareWarning],
+    ["Reports & Analytics", "/analytics", BarChart3]
+  ]
 
-    CITIZEN: {
-      title: "Citizen Portal",
-      subtitle: "Community Member",
 
-      items: [
-        ["Home", "/", LayoutDashboard],
-        ["Log Waste", "/verification", Camera],
-        ["E-Waste", "/e-waste", Smartphone],
-        ["Rewards", "/rewards", Gift],
-        ["Market", "/marketplace", Store]
-      ]
-    },
+  const citizenItems = [
+    ["Dashboard", "/", LayoutDashboard],
+    ["Log Waste", "/verification", Recycle],
+    ["E-Waste", "/e-waste", Smartphone],
+    ["Rewards", "/rewards", Gift],
+    ["Marketplace", "/marketplace", Store],
+    ["Leaderboards", "/leaderboards", Trophy]
+  ]
 
-    RECYCLER: {
-      title: "Recycler Portal",
-      subtitle: "Marketplace Partner",
 
-      items: [
-        ["Dashboard", "/", LayoutDashboard],
-        ["Browse Materials", "/marketplace", Store],
-        ["My Listings", "/marketplace", Package],
-        ["Collection Activity", "/routes", Truck]
-      ]
-    }
+  const collectorItems = [
+    ["Dashboard", "/collector", LayoutDashboard],
+    ["Today's Routes", "/collector/routes", Navigation],
+    ["Live Map", "/collector/map", Map],
+    ["Assigned Pickups", "/collector/pickups", ClipboardCheck],
+    ["Area Feedback", "/collector/feedback", MessageSquareWarning],
+    ["Leaderboards", "/leaderboards", Trophy]
+  ]
 
+
+  const recyclerItems = [
+    ["Dashboard", "/", LayoutDashboard],
+    ["Collection Routes", "/routes", Truck],
+    ["Waste Verification", "/verification", Recycle],
+    ["Smart Bins", "/bins", Trash2],
+    ["Marketplace", "/marketplace", Store]
+  ]
+
+
+  let items = municipalItems
+
+
+  if (role === "CITIZEN") {
+    items = citizenItems
   }
 
-  const panel = panels[role] || panels.ADMIN
+
+  if (role === "COLLECTOR") {
+    items = collectorItems
+  }
+
+
+  if (role === "RECYCLER") {
+    items = recyclerItems
+  }
+
 
   return (
+
     <aside className="sidebar">
+
+      {/* BRAND */}
 
       <div className="sidebar-brand">
 
@@ -79,54 +104,60 @@ function Sidebar({ role, setRole }) {
       </div>
 
 
+      {/* ROLE SWITCHER */}
+
       <div
         style={{
-          padding: "14px 12px",
-          borderBottom: "1px solid #dce1eb"
+          margin: "0 14px 14px",
+          padding: "10px",
+          borderRadius: "9px",
+          background: "rgba(255,255,255,0.06)"
         }}
       >
 
-        <label
+        <span
           style={{
             display: "block",
-            fontSize: "10px",
-            fontWeight: "700",
-            color: "#68736f",
             marginBottom: "6px",
+            color: "#8da49c",
+            fontSize: "9px",
             textTransform: "uppercase",
-            letterSpacing: "0.06em"
+            letterSpacing: ".06em"
           }}
         >
-          View as
-        </label>
+          Current Role
+        </span>
+
 
         <select
           value={role}
-          onChange={(event) => setRole(event.target.value)}
+          onChange={(e) => setRole(e.target.value)}
           style={{
             width: "100%",
-            height: "36px",
-            padding: "0 9px",
-            borderRadius: "8px",
-            border: "1px solid #cfd7d3",
-            background: "#ffffff",
-            color: "#063d33",
-            fontSize: "12px",
-            fontWeight: "600",
-            outline: "none"
+            height: "32px",
+            borderRadius: "6px",
+            background: "#123c31",
+            color: "white",
+            border: "1px solid rgba(255,255,255,.15)",
+            padding: "0 7px",
+            fontSize: "10px"
           }}
         >
 
           <option value="ADMIN">
-            Municipal Admin
+            Municipal Authority
+          </option>
+
+          <option value="COLLECTOR">
+            Waste Collector
           </option>
 
           <option value="CITIZEN">
-            Citizen
+            Citizen / User
           </option>
 
           <option value="RECYCLER">
-            Recycler
+            Recycling Partner
           </option>
 
         </select>
@@ -134,25 +165,14 @@ function Sidebar({ role, setRole }) {
       </div>
 
 
-      <div className="sidebar-role">
-
-        <strong>
-          {panel.title}
-        </strong>
-
-        <span>
-          {panel.subtitle}
-        </span>
-
-      </div>
-
+      {/* NAVIGATION */}
 
       <nav className="sidebar-nav">
 
-        {panel.items.map(([label, path, Icon]) => (
+        {items.map(([name, path, Icon]) => (
 
           <NavLink
-            key={label}
+            key={name}
             to={path}
             className={({ isActive }) =>
               `nav-item ${isActive ? "active" : ""}`
@@ -162,7 +182,7 @@ function Sidebar({ role, setRole }) {
             <Icon size={19} />
 
             <span>
-              {label}
+              {name}
             </span>
 
           </NavLink>
@@ -171,6 +191,91 @@ function Sidebar({ role, setRole }) {
 
       </nav>
 
+
+      {/* USER INFO */}
+
+      <div
+        style={{
+          marginTop: "auto",
+          padding: "14px",
+          borderTop: "1px solid rgba(255,255,255,.08)"
+        }}
+      >
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "9px"
+          }}
+        >
+
+          <div
+            style={{
+              width: "31px",
+              height: "31px",
+              borderRadius: "50%",
+              background: "#dff4ed",
+              color: "#075b49",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+
+            <UserRound size={16} />
+
+          </div>
+
+
+          <div>
+
+            <strong
+              style={{
+                display: "block",
+                color: "white",
+                fontSize: "10px"
+              }}
+            >
+
+              {role === "ADMIN"
+                ? "City Admin"
+                : role === "COLLECTOR"
+                ? "Collection Team"
+                : role === "RECYCLER"
+                ? "Recycler Admin"
+                : "Citizen"}
+
+            </strong>
+
+
+            <span
+              style={{
+                display: "block",
+                marginTop: "2px",
+                color: "#8da49c",
+                fontSize: "8px"
+              }}
+            >
+
+              {role === "ADMIN"
+                ? "Municipal Authority"
+                : role === "COLLECTOR"
+                ? "Waste Collection Unit"
+                : role === "RECYCLER"
+                ? "Recycling Partner"
+                : "Community Member"}
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      {/* FOOTER */}
 
       <div className="sidebar-bottom">
 
