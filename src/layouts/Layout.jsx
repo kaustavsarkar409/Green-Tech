@@ -1,35 +1,86 @@
+import { useState } from "react"
+import { Outlet } from "react-router-dom"
 import Sidebar from "../components/Sidebar"
 
-function Layout({ children }) {
+function Layout() {
+  const [role, setRole] = useState("ADMIN")
+
+  const roleInfo = {
+    ADMIN: {
+      label: "Municipal Operations",
+      title: "Community Waste Management",
+      name: "City Admin",
+      subtitle: "Waste Management Dept",
+      avatar: "A"
+    },
+
+    CITIZEN: {
+      label: "Citizen Portal",
+      title: "My Waste Impact",
+      name: "Citizen",
+      subtitle: "Community Member",
+      avatar: "C"
+    },
+
+    RECYCLER: {
+      label: "Recycler Portal",
+      title: "Recycling Marketplace",
+      name: "Recycler",
+      subtitle: "Marketplace Partner",
+      avatar: "R"
+    }
+  }
+
+  const current = roleInfo[role]
+
   return (
     <div className="app-layout">
 
-      <Sidebar />
+      <Sidebar
+        role={role}
+        setRole={setRole}
+      />
 
       <main className="main-area">
 
         <header className="topbar">
+
           <div>
-            <span className="topbar-label">Municipal Operations</span>
-            <h2>Community Waste Management</h2>
+            <span className="topbar-label">
+              {current.label}
+            </span>
+
+            <h2>
+              {current.title}
+            </h2>
           </div>
 
           <div className="user-area">
-            <div className="notification">🔔</div>
+
+            <div className="notification">
+              🔔
+            </div>
 
             <div className="user-avatar">
-              A
+              {current.avatar}
             </div>
 
             <div>
-              <strong>Admin</strong>
-              <span>Municipal Authority</span>
+              <strong>
+                {current.name}
+              </strong>
+
+              <span>
+                {current.subtitle}
+              </span>
             </div>
+
           </div>
+
         </header>
 
         <section className="page-content">
-          {children}
+          <Outlet />
         </section>
 
       </main>

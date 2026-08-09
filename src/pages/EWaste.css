@@ -1,0 +1,486 @@
+.ewaste-page {
+  min-height: calc(100vh - 86px);
+  padding: 10px 0 40px;
+  color: #10352f;
+}
+
+/* ---------- INTRO ---------- */
+
+.ewaste-intro {
+  margin-bottom: 24px;
+}
+
+.ewaste-kicker {
+  display: inline-block;
+  color: #08765c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.ewaste-intro h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #073d32;
+}
+
+.ewaste-intro p {
+  margin: 8px 0 0;
+  max-width: 680px;
+  color: #687873;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ---------- BONUS ---------- */
+
+.ewaste-bonus-bar {
+  background: #e8f7f2;
+  border: 1px solid #c8e9df;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.ewaste-bonus-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #08765c;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.ewaste-bonus-bar strong {
+  font-size: 12px;
+  color: #064c3e;
+}
+
+.ewaste-bonus-bar span {
+  font-size: 11px;
+  color: #60736d;
+}
+
+.ewaste-bonus-points {
+  margin-left: auto;
+  color: #08765c !important;
+  font-weight: 800;
+  font-size: 13px !important;
+}
+
+/* ---------- MAIN GRID ---------- */
+
+.ewaste-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.ewaste-panel {
+  background: #ffffff;
+  border: 1px solid #d8e1de;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(24, 56, 48, 0.04);
+}
+
+/* ---------- PICKUP ---------- */
+
+.ewaste-pickup {
+  padding: 24px;
+}
+
+.ewaste-panel-heading {
+  margin-bottom: 21px;
+}
+
+.ewaste-panel-heading h2 {
+  margin: 0;
+  font-size: 21px;
+  color: #073d32;
+}
+
+.ewaste-panel-heading p {
+  margin: 5px 0 0;
+  color: #75827e;
+  font-size: 11px;
+}
+
+.ewaste-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #25423c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ---------- DEVICE TYPES ---------- */
+
+.ewaste-devices {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+  margin-bottom: 20px;
+}
+
+.ewaste-device {
+  min-height: 72px;
+  border: 1px solid #d5dfdb;
+  border-radius: 9px;
+  background: #fff;
+  color: #36504a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: 0.15s ease;
+}
+
+.ewaste-device:hover {
+  border-color: #57ad98;
+  background: #f3faf7;
+}
+
+.ewaste-device.active {
+  border: 2px solid #08765c;
+  background: #eaf8f3;
+  color: #075b49;
+}
+
+.ewaste-device span {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* ---------- DETAILS ---------- */
+
+.ewaste-field {
+  margin-bottom: 18px;
+}
+
+.ewaste-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #ccd8d4;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  color: #173d35;
+  font-size: 11px;
+}
+
+.ewaste-input:focus {
+  border-color: #08765c;
+  box-shadow: 0 0 0 3px rgba(8, 118, 92, 0.08);
+}
+
+.ewaste-help {
+  margin: 5px 0 0;
+  color: #8a9692;
+  font-size: 9px;
+}
+
+/* ---------- PHOTO ---------- */
+
+.ewaste-upload {
+  height: 118px;
+  border: 1.5px dashed #bfcfc9;
+  border-radius: 9px;
+  background: #fbfcfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ewaste-upload-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e4f6f0;
+  color: #08765c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ewaste-upload strong {
+  font-size: 10px;
+  color: #36514a;
+}
+
+.ewaste-upload span {
+  font-size: 9px;
+  color: #8a9692;
+}
+
+/* ---------- SCHEDULE BUTTON ---------- */
+
+.ewaste-schedule {
+  width: 100%;
+  height: 43px;
+  margin-top: 17px;
+  border: none;
+  border-radius: 8px;
+  background: #004d3c;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.ewaste-schedule:hover {
+  background: #006653;
+}
+
+/* ---------- RIGHT SIDE ---------- */
+
+.ewaste-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ewaste-info {
+  padding: 20px;
+}
+
+.ewaste-info-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ewaste-info-icon {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 10px;
+  background: #e4f6f0;
+  color: #08765c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ewaste-info h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #143b34;
+}
+
+.ewaste-info p {
+  margin: 7px 0 0;
+  color: #74817d;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.ewaste-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-top: 10px;
+  color: #08765c;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* ---------- RECYCLERS ---------- */
+
+.ewaste-recyclers {
+  padding: 20px;
+}
+
+.ewaste-recyclers-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 13px;
+}
+
+.ewaste-recyclers-heading h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #143b34;
+}
+
+.ewaste-recycler {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid #edf1ef;
+}
+
+.ewaste-recycler:last-of-type {
+  border-bottom: none;
+}
+
+.ewaste-recycler-icon {
+  width: 37px;
+  height: 37px;
+  border-radius: 8px;
+  background: #eef6f3;
+  color: #08765c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ewaste-recycler-info {
+  flex: 1;
+}
+
+.ewaste-recycler-info strong {
+  display: block;
+  font-size: 10px;
+  color: #183c35;
+}
+
+.ewaste-recycler-info span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 4px;
+  font-size: 9px;
+  color: #7a8782;
+}
+
+.ewaste-certified {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: #dff6ef;
+  color: #08765c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ewaste-map {
+  width: 100%;
+  height: 36px;
+  margin-top: 12px;
+  border: 1px solid #08765c;
+  border-radius: 7px;
+  background: white;
+  color: #075b49;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* ---------- HOW IT WORKS ---------- */
+
+.ewaste-how {
+  margin-top: 18px;
+  padding: 21px 24px;
+}
+
+.ewaste-how h2 {
+  margin: 0 0 17px;
+  font-size: 16px;
+  color: #143b34;
+}
+
+.ewaste-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.ewaste-step {
+  position: relative;
+  padding: 13px;
+  background: #f7faf9;
+  border: 1px solid #e3ebe8;
+  border-radius: 10px;
+}
+
+.ewaste-step-number {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #dff5ed;
+  color: #08765c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 9px;
+}
+
+.ewaste-step strong {
+  display: block;
+  font-size: 10px;
+  color: #173c35;
+}
+
+.ewaste-step p {
+  margin: 5px 0 0;
+  color: #7a8782;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 900px) {
+  .ewaste-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ewaste-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .ewaste-page {
+    padding: 5px 0 30px;
+  }
+
+  .ewaste-intro h1 {
+    font-size: 27px;
+  }
+
+  .ewaste-bonus-points {
+    display: none;
+  }
+
+  .ewaste-devices {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ewaste-pickup,
+  .ewaste-info,
+  .ewaste-recyclers,
+  .ewaste-how {
+    padding: 17px;
+  }
+
+  .ewaste-steps {
+    grid-template-columns: 1fr;
+  }
+}

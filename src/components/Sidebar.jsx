@@ -4,61 +4,184 @@ import {
   Truck,
   Recycle,
   Gift,
-  Store
+  Store,
+  MapPinned,
+  Camera,
+  Smartphone,
+  Package
 } from "lucide-react"
 
 import { NavLink } from "react-router-dom"
 
-function Sidebar() {
+function Sidebar({ role, setRole }) {
+
+  const panels = {
+
+    ADMIN: {
+      title: "Municipal Operations",
+      subtitle: "Waste Management Dept",
+
+      items: [
+        ["Dashboard", "/", LayoutDashboard],
+        ["Smart Bins", "/bins", Trash2],
+        ["Garbage Hotspots", "/hotspots", MapPinned],
+        ["Collection Routes", "/routes", Truck],
+        ["Waste Verification", "/verification", Recycle],
+        ["E-Waste", "/e-waste", Smartphone],
+        ["Rewards", "/rewards", Gift],
+        ["Marketplace", "/marketplace", Store]
+      ]
+    },
+
+    CITIZEN: {
+      title: "Citizen Portal",
+      subtitle: "Community Member",
+
+      items: [
+        ["Home", "/", LayoutDashboard],
+        ["Log Waste", "/verification", Camera],
+        ["E-Waste", "/e-waste", Smartphone],
+        ["Rewards", "/rewards", Gift],
+        ["Market", "/marketplace", Store]
+      ]
+    },
+
+    RECYCLER: {
+      title: "Recycler Portal",
+      subtitle: "Marketplace Partner",
+
+      items: [
+        ["Dashboard", "/", LayoutDashboard],
+        ["Browse Materials", "/marketplace", Store],
+        ["My Listings", "/marketplace", Package],
+        ["Collection Activity", "/routes", Truck]
+      ]
+    }
+
+  }
+
+  const panel = panels[role] || panels.ADMIN
+
   return (
     <aside className="sidebar">
 
       <div className="sidebar-brand">
-        <div className="brand-mark">♻</div>
+
+        <div className="brand-mark">
+          ♻
+        </div>
 
         <div>
           <h2>CWMS</h2>
           <span>Waste Management</span>
         </div>
+
       </div>
+
+
+      <div
+        style={{
+          padding: "14px 12px",
+          borderBottom: "1px solid #dce1eb"
+        }}
+      >
+
+        <label
+          style={{
+            display: "block",
+            fontSize: "10px",
+            fontWeight: "700",
+            color: "#68736f",
+            marginBottom: "6px",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em"
+          }}
+        >
+          View as
+        </label>
+
+        <select
+          value={role}
+          onChange={(event) => setRole(event.target.value)}
+          style={{
+            width: "100%",
+            height: "36px",
+            padding: "0 9px",
+            borderRadius: "8px",
+            border: "1px solid #cfd7d3",
+            background: "#ffffff",
+            color: "#063d33",
+            fontSize: "12px",
+            fontWeight: "600",
+            outline: "none"
+          }}
+        >
+
+          <option value="ADMIN">
+            Municipal Admin
+          </option>
+
+          <option value="CITIZEN">
+            Citizen
+          </option>
+
+          <option value="RECYCLER">
+            Recycler
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div className="sidebar-role">
+
+        <strong>
+          {panel.title}
+        </strong>
+
+        <span>
+          {panel.subtitle}
+        </span>
+
+      </div>
+
 
       <nav className="sidebar-nav">
 
-        <NavLink to="/" className="nav-item">
-          <LayoutDashboard size={19} />
-          <span>Dashboard</span>
-        </NavLink>
+        {panel.items.map(([label, path, Icon]) => (
 
-        <NavLink to="/bins" className="nav-item">
-          <Trash2 size={19} />
-          <span>Smart Bins</span>
-        </NavLink>
+          <NavLink
+            key={label}
+            to={path}
+            className={({ isActive }) =>
+              `nav-item ${isActive ? "active" : ""}`
+            }
+          >
 
-        <NavLink to="/routes" className="nav-item">
-          <Truck size={19} />
-          <span>Collection Routes</span>
-        </NavLink>
+            <Icon size={19} />
 
-        <NavLink to="/verification" className="nav-item">
-          <Recycle size={19} />
-          <span>Waste Verification</span>
-        </NavLink>
+            <span>
+              {label}
+            </span>
 
-        <NavLink to="/rewards" className="nav-item">
-          <Gift size={19} />
-          <span>Rewards</span>
-        </NavLink>
+          </NavLink>
 
-        <NavLink to="/marketplace" className="nav-item">
-          <Store size={19} />
-          <span>Marketplace</span>
-        </NavLink>
+        ))}
 
       </nav>
 
+
       <div className="sidebar-bottom">
-        <span>Community Waste Management</span>
-        <small>v1.0 Prototype</small>
+
+        <span>
+          Community Waste Management
+        </span>
+
+        <small>
+          v1.0 Prototype
+        </small>
+
       </div>
 
     </aside>
